@@ -9,7 +9,6 @@ Pages, Netlify, or plain shared hosting / cPanel).
 
 ```
 index.html            Home
-about.html             Our Story (host name & history: dummy text)
 rooms.html             Rooms & Rates
 things-to-do.html      Things to Do in Wayanad
 gallery.html           Photo gallery + lightbox
@@ -52,24 +51,21 @@ build command empty, output directory `/` (root).
    ```
    The site fills every WhatsApp / call / email link from these three values.
 
-2. **Address & distances** — search the pages for `Vayalnad, near Meenangadi`.
-   Update the address, the Google Maps embed `src` in `contact.html`, and all
-   the `~ nn km` distances (rooms, things-to-do, contact).
+2. **Address & distances** — the address text reads "Vayalnad, Wayanad, Kerala"
+   across the footers and `contact.html`. Update it, and check the `~ nn km`
+   distances on `contact.html` against the real map pin.
 
 3. **Rooms & rates** — `rooms.html`, `index.html` (rooms preview) and
    `booking.html` (the `<select id="room">` options + rates panel). Room names,
    bed configs, occupancy and prices are all sample content.
 
-4. **Story text** — `about.html`. Only the tagline is confirmed; the host name,
-   family history and all plot/grounds details are dummy prose.
-
-5. **Reviews** — `index.html` testimonials are dummy. Swap in real quotes or
+4. **Reviews** — `index.html` testimonials are dummy. Swap in real quotes or
    link your Google / Airbnb reviews.
 
-6. **Social links** — every `href="#"` on the Instagram / Facebook icons
+5. **Social links** — every `href="#"` on the Instagram / Facebook icons
    (top bar + footer on all pages).
 
-7. **Images** — drop replacements into `assets/img/` keeping the same
+6. **Images** — drop replacements into `assets/img/` keeping the same
    filenames and the pages pick them up. For best performance, re-export the
    large photos to ~1600px wide and consider WebP.
 
