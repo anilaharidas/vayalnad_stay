@@ -701,6 +701,13 @@ p { text-wrap: pretty; }
 }
 @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-brand__mark {
+  width: 46px;
+  height: 46px;
+  color: var(--copper-soft);
+  margin-bottom: .9rem;
+  display: block;
+}
 .footer-brand__name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.5rem;
