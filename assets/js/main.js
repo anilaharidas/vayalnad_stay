@@ -5,8 +5,8 @@
    ========================================================= */
 window.VNS = {
   // WhatsApp number in full international format, digits only (no +, spaces or dashes)
-  whatsapp: '919000000000',        // TODO: real number
-  phoneDisplay: '+91 90000 00000', // TODO
+  whatsapp: '919567394350',        // TODO: real number
+  phoneDisplay: '+91 9567394350', // TODO
   email: 'stay@vayalnadstay.com',  // TODO
 };
 

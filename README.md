@@ -45,8 +45,8 @@ build command empty, output directory `/` (root).
    `assets/js/main.js`:
    ```js
    window.VNS = {
-     whatsapp: '919000000000',        // full international, digits only
-     phoneDisplay: '+91 90000 00000',
+     whatsapp: '919567394350',        // full international, digits only
+     phoneDisplay: '+91 9567394350',
      email: 'stay@vayalnadstay.com',
    };
    ```
