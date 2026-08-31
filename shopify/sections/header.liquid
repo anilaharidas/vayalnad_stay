@@ -1,0 +1,78 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign wa = settings.wa_number
+-%}
+
+{%- if section.settings.show_topbar -%}
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__group topbar__group--contact">
+      {%- if settings.phone_display != blank -%}
+        <a href="#" data-tel data-tel-text>{% render 'icon', name: 'phone' %}<span>&nbsp;{{ settings.phone_display }}</span></a>
+      {%- endif -%}
+      {%- if settings.contact_email != blank -%}
+        <a href="#" data-email data-email-text>{% render 'icon', name: 'mail' %}<span>&nbsp;{{ settings.contact_email }}</span></a>
+      {%- endif -%}
+    </div>
+    <div class="topbar__group">
+      <span class="sr-only">Follow us</span>
+      <div class="topbar__socials">
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %}</a>
+        {%- endif -%}
+        {%- if settings.social_facebook != blank -%}
+          <a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener">{% render 'icon', name: 'facebook' %}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ settings.brand_name }} — home">
+      {% render 'brand-mark', class: 'brand__mark' %}
+      <span class="brand__text">
+        <span class="brand__name">{{ settings.brand_name | default: shop.name }}</span>
+        {%- if settings.brand_tagline != blank -%}
+          <span class="brand__tag">{{ settings.brand_tagline }}</span>
+        {%- endif -%}
+      </span>
+    </a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      {% render 'icon', name: 'menu' %}
+    </button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <button class="nav__close" aria-label="Close menu">{% render 'icon', name: 'close' %}</button>
+      <ul class="nav__list">
+        {%- for link in linklists[menu].links -%}
+          <li>
+            <a class="nav__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.cta_url != blank -%}
+        <a class="btn btn--primary nav__cta nav__cta--mobile" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </nav>
+
+    {%- if section.settings.cta_url != blank -%}
+      <a class="btn btn--primary nav__cta" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "show_topbar", "label": "Show contact / social top bar", "default": true },
+    { "type": "url", "id": "cta_url", "label": "Header button link" },
+    { "type": "text", "id": "cta_label", "label": "Header button label", "default": "Book your stay" }
+  ]
+}
+{% endschema %}

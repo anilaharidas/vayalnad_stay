@@ -1,0 +1,21 @@
+{%- comment -%}
+  Renders the rich text written in the Shopify Page editor (Online Store → Pages).
+  For the richer pages (Rooms, Gallery, Things to Do) add purpose-built sections
+  instead — see shopify/README.md.
+{%- endcomment -%}
+{%- if page.content != blank -%}
+<section class="section section--paper">
+  <div class="container">
+    <div class="rte stack">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": []
+}
+{% endschema %}

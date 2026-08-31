@@ -1,0 +1,76 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Vayalnad Stay",
+    "theme_version": "1.0.0",
+    "theme_author": "Vayalnad Stay",
+    "theme_documentation_url": "https://github.com/anilaharidas/vayalnad_stay",
+    "theme_support_url": "https://github.com/anilaharidas/vayalnad_stay/issues"
+  },
+  {
+    "name": "Contact & booking",
+    "settings": [
+      {
+        "type": "text",
+        "id": "wa_number",
+        "label": "WhatsApp number",
+        "info": "Full international format, digits only — e.g. 919567394350"
+      },
+      {
+        "type": "text",
+        "id": "phone_display",
+        "label": "Phone number (as shown)",
+        "default": "+91 9567394350"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact email",
+        "default": "stay@vayalnadstay.com"
+      },
+      {
+        "type": "textarea",
+        "id": "address_text",
+        "label": "Address (shown in footer)",
+        "default": "Vayalnad, Wayanad, Kerala"
+      },
+      {
+        "type": "url",
+        "id": "map_url",
+        "label": "Google Maps link",
+        "info": "Full google.com/maps URL — avoid shortened goo.gl links"
+      },
+      {
+        "type": "text",
+        "id": "map_embed_query",
+        "label": "Map embed coordinates or query",
+        "default": "11.735161,76.137428",
+        "info": "Used by the contact map iframe: google.com/maps?q=<this>&output=embed"
+      }
+    ]
+  },
+  {
+    "name": "Social links",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook URL" }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Wordmark",
+        "default": "Vayalnad Stay"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Tagline",
+        "default": "Every travel is a catharsis"
+      }
+    ]
+  }
+]

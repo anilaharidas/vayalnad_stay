@@ -1,0 +1,134 @@
+{%- comment -%}
+  Booking request form — ported from booking.html.
+  It composes a pre-filled WhatsApp message; no Shopify commerce involved.
+  The field `name` attributes and the ids #booking-form / #booking-summary
+  are what assets/main.js looks for — keep them as-is.
+{%- endcomment -%}
+<section class="section section--paper">
+  <div class="container">
+    <div class="split" style="align-items:start">
+
+      <div>
+        <form class="form-card" id="booking-form" novalidate>
+          <h2 style="margin-bottom:1.5rem">{{ section.settings.form_heading | default: 'Your details' }}</h2>
+
+          <div class="field">
+            <label for="name">Full name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <p class="field__error">Please tell us your name.</p>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone / WhatsApp <span class="req" aria-hidden="true">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+91 " required>
+            <p class="field__hint">So we can reach you if WhatsApp doesn't go through.</p>
+            <p class="field__error">Please add a number we can reach you on.</p>
+          </div>
+
+          <div class="field">
+            <label for="room">Room <span class="req" aria-hidden="true">*</span></label>
+            <select id="room" name="room" required>
+              <option value="">Choose a room…</option>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'room' -%}
+                  <option value="{{ block.settings.name | escape }}" {{ block.shopify_attributes }}>{{ block.settings.label | default: block.settings.name }}</option>
+                {%- endif -%}
+              {%- endfor -%}
+              <option value="Not sure yet">Not sure yet — please advise</option>
+            </select>
+            <p class="field__error">Please choose a room (or "not sure yet").</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="checkin">Check-in <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="checkin" name="checkin" required>
+              <p class="field__error">Pick a check-in date.</p>
+            </div>
+            <div class="field">
+              <label for="checkout">Check-out <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="checkout" name="checkout" required>
+              <p class="field__error">Check-out must be after check-in.</p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="adults">Adults <span class="req" aria-hidden="true">*</span></label>
+              <select id="adults" name="adults" required>
+                {%- for n in (1..6) -%}<option value="{{ n }}"{% if n == 2 %} selected{% endif %}>{{ n }}</option>{%- endfor -%}
+              </select>
+              <p class="field__error">How many adults?</p>
+            </div>
+            <div class="field">
+              <label for="children">Children</label>
+              <select id="children" name="children">
+                {%- for n in (0..4) -%}<option value="{{ n }}">{{ n }}</option>{%- endfor -%}
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Anything else?</label>
+            <textarea id="message" name="message" placeholder="Meal preferences, arrival time, help with an itinerary, a driver from the bus stand…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--wa btn--block">
+            {% render 'icon', name: 'whatsapp-solid' %}
+            Send request on WhatsApp
+          </button>
+          <p class="form-note">
+            {% render 'icon', name: 'whatsapp' %}
+            This opens WhatsApp with your details written out. Nothing is sent until you press send there.
+          </p>
+        </form>
+      </div>
+
+      <div class="stack">
+        <div class="form-card">
+          <span class="eyebrow">Preview</span>
+          <h3 style="margin:.5rem 0 1rem">Your message to us</h3>
+          <pre id="booking-summary" style="white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-family:inherit;font-size:.95rem;color:var(--muted);background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:1rem;min-height:170px"></pre>
+        </div>
+
+        {%- if section.settings.policy_richtext != blank -%}
+          <div class="form-card">
+            <span class="eyebrow">Rates &amp; policy</span>
+            <div class="rte" style="margin-top:.6rem">{{ section.settings.policy_richtext }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Booking form",
+  "settings": [
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Your details" },
+    { "type": "richtext", "id": "policy_richtext", "label": "Rates & policy panel" }
+  ],
+  "blocks": [
+    {
+      "type": "room",
+      "name": "Room option",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Room value (goes into the message)", "default": "Valley View Room" },
+        { "type": "text", "id": "label", "label": "Option label (shown in dropdown)", "default": "Valley View Room — ₹3,500 / night" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Booking form",
+      "blocks": [
+        { "type": "room", "settings": { "name": "Valley View Room", "label": "Valley View Room — ₹3,500 / night" } },
+        { "type": "room", "settings": { "name": "Forest Balcony Room", "label": "Forest Balcony Room — ₹4,500 / night" } },
+        { "type": "room", "settings": { "name": "Family Cottage", "label": "Family Cottage (whole floor) — ₹8,000 / night" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

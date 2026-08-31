@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "cta1": {
+          "type": "button",
+          "settings": { "label": "Check availability", "url": "shopify://pages/book-your-stay", "style": "btn--primary" }
+        },
+        "cta2": {
+          "type": "button",
+          "settings": { "label": "View rooms", "url": "shopify://pages/rooms-rates", "style": "btn--on-dark" }
+        }
+      },
+      "block_order": ["cta1", "cta2"],
+      "settings": {
+        "eyebrow": "Wayanad · Kerala",
+        "heading": "A quiet homestay in the folds of Wayanad",
+        "tagline": "Every travel is a catharsis.",
+        "body": "<p>Wake to birdsong and mist over the areca palms. A small, family-run home in a working farm valley — close enough to Wayanad's hills and waterfalls, far enough to hear nothing but the stream.</p>",
+        "scroll_anchor": "welcome"
+      }
+    }
+  },
+  "order": ["hero"]
+}

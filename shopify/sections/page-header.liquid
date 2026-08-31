@@ -1,0 +1,39 @@
+{%- comment -%}
+  Interior page hero — ported from <section class="page-hero"> on the static site.
+{%- endcomment -%}
+<section class="page-hero">
+  {%- if section.settings.image != blank -%}
+    <div class="page-hero__media">
+      <img src="{{ section.settings.image | image_url: width: 1600 }}"
+           width="{{ section.settings.image.width }}"
+           height="{{ section.settings.image.height }}"
+           alt="" aria-hidden="true">
+    </div>
+  {%- endif -%}
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      {% render 'icon', name: 'chevron-right' %}
+      <span>{{ section.settings.eyebrow | default: page.title }}</span>
+    </nav>
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow is-light">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1>{{ section.settings.heading | default: page.title }}</h1>
+    {%- if section.settings.intro != blank -%}
+      <p>{{ section.settings.intro }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page header",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow / section label" },
+    { "type": "text", "id": "heading", "label": "Heading (defaults to page title)" },
+    { "type": "textarea", "id": "intro", "label": "Intro line" }
+  ]
+}
+{% endschema %}

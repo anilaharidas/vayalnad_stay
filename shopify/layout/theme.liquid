@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction | default: 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2c3617">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+
+  <title>
+    {{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}
+    {%- unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ 'logo.jpg' | asset_url | prepend: 'https:' }}">
+  {% if page_description %}<meta property="og:description" content="{{ page_description | escape }}">{% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    /* Contact details come from Theme settings — see config/settings_schema.json */
+    window.VNS = {
+      whatsapp: {{ settings.wa_number | default: '' | json }},
+      phoneDisplay: {{ settings.phone_display | default: '' | json }},
+      email: {{ settings.contact_email | default: shop.email | json }}
+    };
+  </script>
+
+  {{ content_for_header }}
+</head>
+<body class="template-{{ request.page_type | handle }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {% section 'header' %}
+
+  <main id="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {%- if settings.wa_number != blank -%}
+    <a class="wa-fab" data-wa="Hello {{ shop.name }}, I have a question about staying with you." href="#" aria-label="Chat on WhatsApp">
+      {% render 'icon', name: 'whatsapp-solid' %}
+    </a>
+  {%- endif -%}
+
+  <script src="{{ 'main.js' | asset_url }}" defer></script>
+</body>
+</html>
