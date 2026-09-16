@@ -264,19 +264,20 @@ p { text-wrap: pretty; }
   text-transform: uppercase;
 }
 .brand__tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
   font-weight: 500;
-  font-size: .8rem;
-  letter-spacing: .04em;
+  font-size: .76rem;
+  letter-spacing: .05em;
   color: var(--clay);
-  margin-top: .3rem;
-  padding-inline: .2em;
-  background-image: linear-gradient(rgba(192, 138, 107, .3), rgba(192, 138, 107, .3));
-  background-repeat: no-repeat;
-  background-size: 100% .38em;
-  background-position: 0 88%;
+  margin-top: .4rem;
+  padding: .28rem 1rem;
+  border: 1px solid var(--copper);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav { display: flex; align-items: center; gap: 1.6rem; }
