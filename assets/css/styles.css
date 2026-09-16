@@ -673,50 +673,77 @@ p { text-wrap: pretty; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
 
-.field--checkbox { margin-bottom: 1.4rem; }
-.checkbox {
+/* ---------- Option toggle (e.g. "Need a local taxi?") ---------- */
+/* Selectors are prefixed with .field to out-specificity ".field label" (uppercase, block) */
+.field .option-toggle {
   display: flex;
-  align-items: flex-start;
-  gap: .7rem;
-  cursor: pointer;
-  font-size: .96rem;
-  color: var(--ink);
-  line-height: 1.4;
-}
-.checkbox input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  margin-top: .1em;
+  align-items: center;
+  gap: 1rem;
+  padding: .9rem 1.1rem;
   border: 1px solid var(--line);
-  border-radius: 5px;
+  border-radius: var(--radius-lg);
   background: var(--cream);
   cursor: pointer;
-  transition: background .2s var(--ease), border-color .2s var(--ease);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0;
+  transition: border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
 }
-.checkbox input[type="checkbox"]:hover { border-color: var(--green-600); }
-.checkbox input[type="checkbox"]:checked {
-  background: var(--green-600);
-  border-color: var(--green-600);
+.field .option-toggle:hover { border-color: var(--copper); }
+.option-toggle input[type="checkbox"] {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
-.checkbox input[type="checkbox"]:checked::after {
+.option-toggle__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green-100);
+  color: var(--green-700);
+  transition: background .2s var(--ease), color .2s var(--ease);
+}
+.option-toggle__icon .icon { width: 20px; height: 20px; }
+.option-toggle__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  min-width: 0;
+}
+.option-toggle__text strong { display: block; font-size: .98rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; }
+.option-toggle__text small { display: block; font-size: .84rem; font-weight: 400; color: var(--muted); text-transform: none; letter-spacing: normal; }
+.option-toggle__switch {
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--line);
+  position: relative;
+  transition: background .2s var(--ease);
+}
+.option-toggle__switch::after {
   content: "";
   position: absolute;
-  left: 7px;
-  top: 3px;
-  width: 6px;
-  height: 10px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(44, 54, 23, .35);
+  transition: transform .2s var(--ease);
 }
-.checkbox input[type="checkbox"]:focus-visible {
-  outline: 3px solid var(--green-600);
-  outline-offset: 2px;
-}
+.option-toggle input:checked ~ .option-toggle__switch { background: var(--green-600); }
+.option-toggle input:checked ~ .option-toggle__switch::after { transform: translateX(18px); }
+.option-toggle input:checked ~ .option-toggle__icon { background: var(--green-600); color: #fff; }
+.field .option-toggle:has(input:checked) { border-color: var(--green-600); background: var(--green-100); }
+.option-toggle input:focus-visible ~ .option-toggle__switch { outline: 3px solid var(--green-600); outline-offset: 2px; }
 
 .form-note {
   display: flex; gap: .6rem;
