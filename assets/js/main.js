@@ -175,6 +175,7 @@ window.VNS = {
         'Check-out: ' + (fmtDate(co) || '—'),
         (n ? 'Nights: ' + n : ''),
         'Guests: ' + (data.get('adults') || '0') + ' adult(s), ' + (data.get('children') || '0') + ' child(ren)',
+        (data.get('taxi') ? 'Local taxi needed: Yes' : ''),
         (data.get('phone') ? 'My phone: ' + data.get('phone') : ''),
         (data.get('message') ? '' : null),
         (data.get('message') ? 'Notes: ' + data.get('message') : '')
