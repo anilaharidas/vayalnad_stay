@@ -13,3 +13,7 @@ node_modules/
 
 # Local Claude Code skill packs (not part of the site)
 .claude/skills/
+
+# Shopify theme — kept local, not part of the static-site repo that Cloudflare/Pages deploys
+shopify/
+vayalnad-theme/
