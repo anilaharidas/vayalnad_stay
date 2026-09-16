@@ -373,17 +373,17 @@ p { text-wrap: pretty; }
 .hero__inner { padding-block: clamp(3rem, 9vw, 7rem); max-width: 40ch; }
 .hero h1 { color: #fff; margin-block: 1rem 1.2rem; }
 .hero__tagline {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: var(--step-1);
   color: var(--copper-soft);
   margin-bottom: 2rem;
-  padding-inline: .25em;
-  background-image: linear-gradient(rgba(247, 242, 231, .16), rgba(247, 242, 231, .16));
-  background-repeat: no-repeat;
-  background-size: 100% .4em;
-  background-position: 0 90%;
+  padding: .4rem 1.2rem;
+  border: 1px solid var(--copper-soft);
+  border-radius: 999px;
+  background: rgba(44, 54, 23, .38);
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
 .hero__scroll {
@@ -803,16 +803,16 @@ p { text-wrap: pretty; }
   color: var(--cream);
 }
 .footer-brand__tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-style: italic;
   font-family: 'Cormorant Garamond', serif;
   color: var(--copper-soft);
   margin-top: .5rem;
-  padding-inline: .25em;
-  background-image: linear-gradient(rgba(247, 242, 231, .12), rgba(247, 242, 231, .12));
-  background-repeat: no-repeat;
-  background-size: 100% .4em;
-  background-position: 0 90%;
+  padding: .35rem 1.1rem;
+  border: 1px solid var(--copper-soft);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
 }
 .footer-col h4 {
   color: var(--cream);
