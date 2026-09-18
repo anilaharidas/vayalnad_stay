@@ -4,8 +4,12 @@
     {
       "name": "vayalnad-site",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4321"],
-      "port": 4321
+      "runtimeArgs": [
+        "-c",
+        "import http.server,socketserver,os; port=int(os.environ.get('PORT',4321)); socketserver.TCPServer.allow_reuse_address=True; httpd=socketserver.TCPServer(('',port), http.server.SimpleHTTPRequestHandler); print('Serving on port', port); httpd.serve_forever()"
+      ],
+      "port": 4321,
+      "autoPort": true
     }
   ]
 }
