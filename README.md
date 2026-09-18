@@ -46,7 +46,7 @@ build command empty, output directory `/` (root).
    window.VNS = {
      whatsapp: '919567394350',        // full international, digits only
      phoneDisplay: '+91 9567394350',
-     email: 'stay@vayalnadstay.com',
+     email: 'vayalnadstay@gmail.com',
    };
    ```
    The site fills every WhatsApp / call / email link from these three values.
