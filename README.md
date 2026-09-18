@@ -17,7 +17,7 @@ contact.html           Contact details, map, directions
 assets/
 ├── css/styles.css
 ├── js/main.js          nav, reveal, lightbox, video, booking->WhatsApp
-├── img/                property photos + property-tour.mp4
+├── img/                property photos + lookaround.mp4
 └── brand/              favicon.svg, logo.jpg
 media/                  original photos & video (source, not used by the site)
 ```
