@@ -1,0 +1,4 @@
+# Cloudflare Workers asset upload exclusions.
+# media/ holds original source photos/video (not linked from the site,
+# see README.md) and can exceed the 25 MiB per-file Workers limit.
+media/
