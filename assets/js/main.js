@@ -86,9 +86,9 @@ window.VNS = {
     if (!btn || !video) return;
     btn.addEventListener('click', function () {
       frame.classList.add('is-playing');
-      video.setAttribute('controls', 'controls');
       video.play();
     });
+    video.addEventListener('play', function () { frame.classList.add('is-playing'); });
   });
 
   /* ---------- Lightbox ---------- */
