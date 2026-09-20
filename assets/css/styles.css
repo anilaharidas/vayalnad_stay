@@ -341,13 +341,13 @@ p { text-wrap: pretty; }
   overflow: hidden;
 }
 .hero__media { position: absolute; inset: 0; z-index: -2; }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.8); }
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(56,64,22,.45) 0%, rgba(56,64,22,.25) 40%, rgba(46,54,18,.85) 100%);
+  background: linear-gradient(180deg, rgba(46,54,18,.55) 0%, rgba(46,54,18,.45) 40%, rgba(40,48,15,.9) 100%);
 }
 .hero__inner { padding-block: clamp(3rem, 9vw, 7rem); max-width: 40ch; }
 .hero h1 { color: #fff; margin-block: 1rem 1.2rem; text-shadow: 0 2px 18px rgba(30,36,12,.45); }
