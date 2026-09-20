@@ -20,3 +20,11 @@ vayalnad-theme/
 
 # Wrangler local state
 .wrangler/
+
+# Large camera originals in media/ (RAW + full-size JPGs). Web-sized copies live in assets/img/.
+media/*.ARW
+media/exterior*.JPG
+media/outdoor*.JPG
+media/outside.JPG
+media/fishing.JPG
+media/guitar.jpeg
