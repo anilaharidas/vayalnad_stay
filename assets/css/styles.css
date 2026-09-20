@@ -355,9 +355,11 @@ p { text-wrap: pretty; }
 .hero .eyebrow::before { background: var(--pink); }
 .hero__inner > p { color: var(--ash); }
 @media (max-width: 640px) {
+  .hero { min-height: min(78vh, 640px); }
   .hero h1 { font-size: clamp(1.9rem, 8.5vw, 2.4rem); }
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+.hero .hero__actions { margin-top: 1.5rem; }
 .hero__scroll {
   position: absolute;
   left: 50%; bottom: 1.4rem;
