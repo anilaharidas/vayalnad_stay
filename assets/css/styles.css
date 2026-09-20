@@ -764,7 +764,7 @@ p { text-wrap: pretty; }
 }
 @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
 @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
-.footer-brand__logo { display: block; width: min(316px, 100%); height: auto; margin-bottom: 1rem; }
+.footer-brand__logo { display: block; width: min(260px, calc(100vw - 150px)); height: auto; margin-bottom: 1rem; }
 .footer-col h4 {
   color: var(--cream);
   font-family: 'Work Sans', sans-serif;
