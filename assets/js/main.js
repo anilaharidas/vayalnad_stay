@@ -189,6 +189,12 @@ window.VNS = {
       }
     }
 
+    // ?ladies=1 pre-ticks the ladies-only option
+    if (new URLSearchParams(window.location.search).get('ladies')) {
+      var ladiesEl = form.querySelector('[name="ladies"]');
+      if (ladiesEl) ladiesEl.checked = true;
+    }
+
     var fmtDate = function (v) {
       if (!v) return '';
       var d = new Date(v + 'T00:00:00');
@@ -215,6 +221,7 @@ window.VNS = {
         (n ? 'Nights: ' + n : ''),
         'Guests: ' + (data.get('adults') || '0') + ' adult(s), ' + (data.get('children') || '0') + ' child(ren)',
         (data.get('taxi') ? 'Local taxi needed: Yes' : ''),
+        (data.get('ladies') ? 'Ladies-only stay: Yes (only women guests)' : ''),
         (data.get('phone') ? 'My phone: ' + data.get('phone') : ''),
         (data.get('message') ? '' : null),
         (data.get('message') ? 'Notes: ' + data.get('message') : '')
