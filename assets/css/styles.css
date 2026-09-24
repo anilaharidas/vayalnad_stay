@@ -405,6 +405,9 @@ p { text-wrap: pretty; }
 .card__media { aspect-ratio: 4 / 3; overflow: hidden; }
 .card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
 .card:hover .card__media img { transform: scale(1.05); }
+.card--fit .card__media { background: var(--paper); }
+.card--fit .card__media img { object-fit: contain; }
+.card--fit:hover .card__media img { transform: none; }
 .card__body { padding: 1.5rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
 .card__body h3 { font-size: var(--step-1); }
 .card__meta {
@@ -479,6 +482,14 @@ p { text-wrap: pretty; }
 }
 .room-row__media .slider { height: 100%; aspect-ratio: auto; }
 .room-row__media .slider .slider__slide img { object-position: center; }
+
+.card__media--icon {
+  display: grid;
+  place-items: center;
+  background: var(--green-100);
+  color: var(--clay);
+}
+.card__media--icon .icon { width: 56px; height: 56px; }
 
 .feature { text-align: left; }
 .feature__icon {
