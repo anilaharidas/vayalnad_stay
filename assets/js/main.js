@@ -1,5 +1,5 @@
 /* =========================================================
-   Vayalnad Stay — main.js
+   Vayal Nad Stay — main.js
    ---------------------------------------------------------
    >>> REPLACE THESE PLACEHOLDER VALUES BEFORE GOING LIVE <<<
    ========================================================= */
@@ -45,7 +45,7 @@ window.VNS = {
   /* ---------- Fill WhatsApp / contact links ---------- */
   var waBase = 'https://wa.me/' + window.VNS.whatsapp;
   document.querySelectorAll('[data-wa]').forEach(function (el) {
-    var msg = el.getAttribute('data-wa') || 'Hello Vayalnad Stay, I would like to enquire about a stay.';
+    var msg = el.getAttribute('data-wa') || 'Hello Vayal Nad Stay, I would like to enquire about a stay.';
     el.setAttribute('href', waBase + '?text=' + encodeURIComponent(msg));
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
@@ -78,6 +78,35 @@ window.VNS = {
   /* ---------- Year ---------- */
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
+  /* ---------- Hero photo slideshow ---------- */
+  var heroMedia = document.querySelector('.hero__media');
+  var heroSlides = document.querySelectorAll('.hero__slide');
+  if (heroMedia && heroSlides.length > 1) {
+    var heroIdx = 0;
+    var heroTimer = null;
+    var heroStopped = false;
+    var heroAdvance = function () {
+      heroSlides[heroIdx].classList.remove('is-active');
+      heroIdx = (heroIdx + 1) % heroSlides.length;
+      heroSlides[heroIdx].classList.add('is-active');
+    };
+    var heroStart = function () {
+      if (heroTimer || heroStopped) return;
+      heroTimer = setInterval(heroAdvance, 5000);
+    };
+    var heroPause = function () {
+      clearInterval(heroTimer);
+      heroTimer = null;
+    };
+    heroStart();
+    heroMedia.addEventListener('mouseenter', heroPause);
+    heroMedia.addEventListener('mouseleave', heroStart);
+    heroMedia.addEventListener('click', function () {
+      heroStopped = true;
+      heroPause();
+    });
+  }
 
   /* ---------- Video frame ---------- */
   document.querySelectorAll('.video-frame').forEach(function (frame) {
@@ -212,7 +241,7 @@ window.VNS = {
       var ci = data.get('checkin'), co = data.get('checkout');
       var n = (ci && co) ? nights(ci, co) : 0;
       var lines = [
-        'Hello Vayalnad Stay, I would like to request a booking.',
+        'Hello Vayal Nad Stay, I would like to request a booking.',
         '',
         'Name: ' + (data.get('name') || '—'),
         'Room: ' + (data.get('room') || '—'),

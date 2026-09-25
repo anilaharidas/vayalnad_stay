@@ -1,6 +1,6 @@
-# Vayalnad Stay — website
+# Vayal Nad Stay — website
 
-A static, multi-page marketing site for Vayalnad Stay, a homestay in Wayanad,
+A static, multi-page marketing site for Vayal Nad Stay, a homestay in Wayanad,
 Kerala. No build step — just HTML, CSS and one small JS file. The site files
 live at the repo root so it can be hosted anywhere (GitHub Pages, Cloudflare
 Pages, Netlify, or plain shared hosting / cPanel).
@@ -51,7 +51,7 @@ build command empty, output directory `/` (root).
    ```
    The site fills every WhatsApp / call / email link from these three values.
 
-2. **Address & distances** — the address text reads "Vayalnad, Wayanad, Kerala"
+2. **Address & distances** — the address text reads "Vayal Nad, Wayanad, Kerala"
    across the footers and `contact.html`. Update it, and check the `~ nn km`
    distances on `contact.html` against the real map pin.
 
