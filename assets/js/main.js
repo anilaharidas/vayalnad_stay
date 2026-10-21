@@ -99,6 +99,49 @@ window.VNS = {
       clearInterval(heroTimer);
       heroTimer = null;
     };
+    // Crop each photo to fill the hero. The crop window is placed so the whole
+    // watermark stays visible and sits as close to the main subject as it can.
+    // Only if the watermark cannot fit at all is the whole photo shown instead.
+    var MIN_VISIBLE = 0.3;
+    var place = function (lo, hi, want) { return Math.min(hi, Math.max(lo, want)); };
+    var layoutHero = function () {
+      var box = heroMedia.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      heroSlides.forEach(function (slide) {
+        var img = slide.querySelector('img');
+        var iw = parseFloat(img.getAttribute('width'));
+        var ih = parseFloat(img.getAttribute('height'));
+        var subj = (slide.getAttribute('data-subject') || '0.5,0.5').split(',').map(parseFloat);
+        var wm = (slide.getAttribute('data-wm') || '').split(',').filter(Boolean).map(parseFloat);
+        var scale = Math.max(box.width / iw, box.height / ih);
+        var fx = Math.min(1, box.width / (iw * scale));
+        var fy = Math.min(1, box.height / (ih * scale));
+        var loX = 0, hiX = 1 - fx, loY = 0, hiY = 1 - fy;
+        if (wm.length) {
+          loX = Math.max(loX, wm[2] - fx); hiX = Math.min(hiX, wm[0]);
+          loY = Math.max(loY, wm[3] - fy); hiY = Math.min(hiY, wm[1]);
+        }
+        var ok = Math.min(fx, fy) >= MIN_VISIBLE && loX <= hiX + 0.0005 && loY <= hiY + 0.0005;
+        slide.classList.toggle('is-cover', ok);
+        if (ok) {
+          var left = place(loX, Math.max(loX, hiX), subj[0] - fx / 2);
+          var top = place(loY, Math.max(loY, hiY), subj[1] - fy / 2);
+          var px = (1 - fx) > 0.0005 ? left / (1 - fx) * 100 : 50;
+          var py = (1 - fy) > 0.0005 ? top / (1 - fy) * 100 : 50;
+          img.style.objectPosition = px.toFixed(2) + '% ' + py.toFixed(2) + '%';
+        } else {
+          img.style.objectPosition = '';
+        }
+      });
+    };
+    layoutHero();
+    var heroResizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(heroResizeTimer);
+      heroResizeTimer = setTimeout(layoutHero, 120);
+    });
+    window.addEventListener('load', layoutHero);
+
     heroStart();
     heroMedia.addEventListener('mouseenter', heroPause);
     heroMedia.addEventListener('mouseleave', heroStart);
