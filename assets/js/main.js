@@ -295,4 +295,139 @@ window.VNS = {
       window.open(url, '_blank', 'noopener');
     });
   }
+
+  /* ---------- Guest reviews + feedback form ---------- */
+  var STAR_PATH = 'm12 2 3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z';
+  var starSvg = function () {
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('class', 'icon');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    var path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', STAR_PATH);
+    svg.appendChild(path);
+    return svg;
+  };
+  var el = function (tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text) node.textContent = text;
+    return node;
+  };
+
+  var reviewsList = document.getElementById('reviews-list');
+  if (reviewsList) {
+    var summary = document.getElementById('reviews-summary');
+    var empty = document.getElementById('reviews-empty');
+    var moreBtn = document.getElementById('reviews-more');
+    var phoneQuery = window.matchMedia('(max-width: 640px)');
+    var cards = [];
+    var expanded = false;
+
+    var initialCount = function () { return phoneQuery.matches ? 3 : 6; };
+
+    // Show "Read more" only on comments that are actually cut off.
+    var updateClamps = function () {
+      cards.forEach(function (card) {
+        if (card.hidden) return;
+        var quote = card.querySelector('blockquote');
+        var toggle = card.querySelector('.quote__more');
+        if (!toggle) return;
+        if (quote.classList.contains('is-open')) { toggle.hidden = false; return; }
+        toggle.hidden = !(quote.scrollHeight > quote.clientHeight + 1);
+      });
+    };
+
+    var applyLimit = function () {
+      var limit = expanded ? cards.length : initialCount();
+      cards.forEach(function (card, i) { card.hidden = i >= limit; });
+      if (moreBtn) {
+        var hasExtra = cards.length > initialCount();
+        moreBtn.hidden = !hasExtra;
+        moreBtn.textContent = expanded ? 'Show fewer reviews' : 'Show more reviews';
+        moreBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+      updateClamps();
+    };
+
+    fetch('/api/reviews')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (data) {
+        if (!data.reviews || !data.reviews.length) { if (empty) empty.hidden = false; return; }
+        data.reviews.forEach(function (rv) {
+          var fig = el('figure', 'quote');
+          var stars = el('div', 'quote__stars');
+          stars.setAttribute('aria-label', rv.rating + ' out of 5');
+          for (var i = 0; i < rv.rating; i++) stars.appendChild(starSvg());
+          fig.appendChild(stars);
+          fig.appendChild(el('blockquote', '', '\u201C' + rv.comment + '\u201D'));
+          var more = el('button', 'quote__more', 'Read more');
+          more.type = 'button';
+          more.hidden = true;
+          more.addEventListener('click', function () {
+            var quote = fig.querySelector('blockquote');
+            var open = quote.classList.toggle('is-open');
+            more.textContent = open ? 'Show less' : 'Read more';
+          });
+          fig.appendChild(more);
+          var by = el('figcaption', 'quote__by');
+          by.appendChild(el('strong', '', rv.name));
+          fig.appendChild(by);
+          reviewsList.appendChild(fig);
+          cards.push(fig);
+        });
+        if (summary && data.average) {
+          summary.innerHTML = '';
+          summary.appendChild(el('strong', '', String(data.average)));
+          summary.appendChild(document.createTextNode('/ 5 from ' + data.count + (data.count === 1 ? ' review' : ' reviews')));
+          summary.hidden = false;
+        }
+        applyLimit();
+        if (moreBtn) moreBtn.addEventListener('click', function () { expanded = !expanded; applyLimit(); });
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(applyLimit, 150);
+        });
+      })
+      .catch(function () { if (empty) empty.hidden = false; });
+  }
+
+  var fbForm = document.getElementById('feedback-form');
+  if (fbForm) {
+    var fbStatus = document.getElementById('feedback-status');
+    var fbBtn = fbForm.querySelector('button[type="submit"]');
+    var showStatus = function (msg, ok) {
+      fbStatus.textContent = msg;
+      fbStatus.className = 'form-status ' + (ok ? 'is-ok' : 'is-error');
+    };
+    fbForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = new FormData(fbForm);
+      if (!data.get('rating')) { showStatus('Please choose a star rating.', false); return; }
+      fbBtn.disabled = true;
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          rating: data.get('rating'),
+          comment: data.get('comment'),
+          website: data.get('website')
+        })
+      })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+        .then(function (res) {
+          if (res.ok) {
+            fbForm.reset();
+            showStatus('Thank you! Your feedback has been received and will appear on the site once we have reviewed it.', true);
+          } else {
+            showStatus(res.body.error || 'Something went wrong. Please try again.', false);
+          }
+        })
+        .catch(function () { showStatus('Could not send your feedback. Please check your connection and try again.', false); })
+        .then(function () { fbBtn.disabled = false; });
+    });
+  }
+
 })();

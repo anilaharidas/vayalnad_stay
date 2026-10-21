@@ -8,3 +8,5 @@ media/
 dev-server.py
 worker.js
 wrangler.jsonc
+d1/
+whatsapp-bot/

@@ -1014,3 +1014,68 @@ p { text-wrap: pretty; }
   .ladies-band__cta { flex-direction: row; flex-wrap: wrap; align-items: center; }
 }
 .option-toggle--ladies .option-toggle__icon { background: var(--pink); color: var(--green-900); }
+
+/* ---------- Guest feedback & reviews ---------- */
+.rating-input {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: .25rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.rating-input input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.rating-input label {
+  cursor: pointer;
+  color: var(--line);
+  font-size: 0;
+  margin: 0;
+  letter-spacing: normal;
+  text-transform: none;
+  transition: color .15s var(--ease), transform .15s var(--ease);
+}
+.rating-input label .icon { width: 34px; height: 34px; fill: currentColor; stroke: none; }
+.rating-input label:hover,
+.rating-input label:hover ~ label,
+.rating-input input:checked ~ label { color: var(--copper); }
+.rating-input label:hover { transform: scale(1.1); }
+.rating-input input:focus-visible + label { outline: 3px solid var(--green-600); outline-offset: 2px; border-radius: 4px; }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { margin-top: 1rem; padding: .9rem 1.1rem; border-radius: 6px; display: none; }
+.form-status.is-ok { display: block; background: var(--green-100); color: var(--green-800); }
+.form-status.is-error { display: block; background: #fbe9e5; color: var(--danger); }
+
+.reviews-summary { display: flex; align-items: center; justify-content: center; gap: .6rem; margin-top: .8rem; color: var(--muted); }
+.reviews-summary strong { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--green-900); }
+.reviews-empty { text-align: center; color: var(--muted); max-width: 48ch; margin-inline: auto; }
+.reviews-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 2rem; }
+#reviews-list .quote blockquote {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+#reviews-list .quote blockquote.is-open { display: block; overflow: visible; }
+.quote__more {
+  align-self: flex-start;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--clay);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.quote__more[hidden], .quote[hidden] { display: none; }
+
+.admin-bar { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.5rem; }
+.admin-bar .btn { padding: .6rem 1.2rem; }
+.admin-bar .btn.is-current { background: var(--green-900); color: #fff; border-color: var(--green-900); }
+.admin-item { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
+.admin-item__meta { color: var(--muted); font-size: var(--step--1); margin-bottom: .5rem; }
+.admin-item__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
+.admin-item__actions .btn { padding: .5rem 1rem; }
+.admin-item__actions .btn.is-armed { background: var(--danger); border-color: var(--danger); color: #fff; }

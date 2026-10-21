@@ -9,6 +9,13 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "run_worker_first": ["/assets/img/*.mp4"]
-  }
+    "run_worker_first": ["/assets/img/*.mp4", "/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vayalnad-feedback",
+      "database_id": "a16df237-a7ca-4c58-b3a9-727475e34392"
+    }
+  ]
 }

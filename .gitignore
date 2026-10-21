@@ -28,3 +28,6 @@ media/outdoor*.JPG
 media/outside.JPG
 media/fishing.JPG
 media/guitar.jpeg
+
+# Local Worker secrets
+.dev.vars
