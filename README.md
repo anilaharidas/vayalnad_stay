@@ -59,8 +59,9 @@ build command empty, output directory `/` (root).
    `booking.html` (the `<select id="room">` options + rates panel). Room names,
    bed configs, occupancy and prices are all sample content.
 
-4. **Reviews** — `index.html` testimonials are dummy. Swap in real quotes or
-   link your Google / Airbnb reviews.
+4. **Reviews** — the sample testimonials were removed from `index.html`.
+   Add real guest quotes or a Google reviews widget when available (the
+   `.quote` styles in `styles.css` are still there for reuse).
 
 5. **Social links** — every `href="#"` on the Instagram / Facebook icons
    (top bar + footer on all pages).
